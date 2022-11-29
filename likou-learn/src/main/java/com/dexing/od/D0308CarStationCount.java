@@ -10,12 +10,9 @@ import java.util.Scanner;
  * 统计停车场最少可以停多少辆车，返回具体的数目。
  * 输入描述:
  * 整型字符串数组cars[]，其中1表示有车，0表示没车，数组长度小于1000。
- * <p>
  * 输出描述：
  * 整型数字字符串，表示最少停车数目。
- * <p>
  * 示例 1：
- * <p>
  * 输入
  * 1,0,1
  * 输出
@@ -26,7 +23,6 @@ import java.util.Scanner;
  * 1个小车占第3个车位
  * 最少有两辆车
  * 示例 2：
- * <p>
  * 输入
  * 1,1,0,0,1,1,1,0,1
  * 输出
@@ -62,5 +58,40 @@ public class D0308CarStationCount {
             }
         }
         System.out.println(count);
+    }
+
+    public static void test() {
+        Scanner sc = new Scanner(System.in);
+        String[] split = sc.nextLine().split(",");
+        //连续的2个1可以是1个 连续三个1可以是1个
+        int total = 0;
+        int tem = 0;
+        for (int i = 0; i < split.length; i++) {
+            if (Integer.parseInt(split[i]) == 1){
+                tem++;
+            }else {
+                if (tem != 0){
+                    total += calcMin(tem);
+                }
+                tem = 0;
+            }
+        }
+        total += calcMin(tem);
+        System.out.println(total);
+    }
+
+    private static int calcMin(int num) {
+        //6 -> 2
+        int total = 0;
+        while (num >= 3){//有多少3 除掉多少3
+            num -= 3;
+            total++;
+        }
+        while (num >= 2){//有多少3 除掉多少3
+            num -= 2;
+            total++;
+        }
+        total += num;
+        return total;
     }
 }
