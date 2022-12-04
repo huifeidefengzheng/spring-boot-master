@@ -3,6 +3,22 @@ package com.dexing.od1;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * 输入
+ * 第一行为将字符串str分成N列
+ * 第二行为字符串str
+ * 输出
+ * n列字符串
+ *
+ * 样例
+ * 输入
+ * 3
+ * abcdefed
+ * 输出
+ * ade
+ * bed
+ * cf
+ */
 public class D0418Strout {
     public static void main(String[] args) {
         test();

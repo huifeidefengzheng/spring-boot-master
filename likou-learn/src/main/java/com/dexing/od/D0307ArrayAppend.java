@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+/**
+ *
+ */
 public class D0307ArrayAppend {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

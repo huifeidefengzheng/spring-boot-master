@@ -17,10 +17,16 @@ import java.util.Map;
  * 输入描述： 一行字符串，每个字符取值范围：【a-zA-z0-9】以及空格，字符串长度范围：【1，1000】
  * 例1： 输入 This is an apple
  * 输出 an is This aelpp
+ *
+ *  例2：
+ *  输入：
+ *  My sister is in the house not in the yard
+ *  输出：
+ *  in in eht eht My is not adry ehosu eirsst
  */
 public class D0214StrSored {
     public static void main(String[] args) {
-        String[] split = "This is an apple".split("\\s+");
+        String[] split = "My sister is in the house not in the yard".split("\\s+");
         ArrayList<Word> words = new ArrayList<>();
         HashMap<String, Integer> map = new HashMap<>();
         for (int i = 0; i < split.length; i++) {
@@ -45,9 +51,15 @@ public class D0214StrSored {
         StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < words.size(); i++) {
             Word word = words.get(i);
-            buffer.append(word.getStr()).append(" ");
+            appendWord(buffer,word);
         }
         System.out.println(buffer);
+    }
+
+    private static void appendWord(StringBuffer buffer, Word word) {
+        for (int i = 0; i < word.count; i++) {
+            buffer.append(word.getStr()).append(" ");
+        }
     }
 
     private static String soredKey(char[] chars) {
@@ -98,12 +110,18 @@ public class D0214StrSored {
 
         @Override
         public int compareTo(Word o) {
-            if (this.count == o.count && this.length == o.length) {
-                return this.str.compareTo(o.str);
+            if (this.count > o.count) {
+                return -1;
             } else if (this.count == o.count) {
-                return this.length - o.length;
+                if (this.length> o.length) {
+                    return 1;
+                } else if (this.length == o.length) {
+                    return this.str.compareTo(o.str);
+                } else {
+                    return -1;
+                }
             } else {
-                return o.count - this.count;
+                return 1;
             }
 
         }
