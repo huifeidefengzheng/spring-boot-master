@@ -1,6 +1,9 @@
 package com.dexing.od;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 给定一个正整数数组，检查数组中是否存在满足规则的数字组合
@@ -35,7 +38,8 @@ public class D1028SumArray {
     }
 
     public static void test() {
-        String str = "1 2 3 4 5 6 7 8 9 10";
+        String str = "2 7 3 0";
+        List<String> strings = Arrays.asList(str.split("\\s+"));
         String[] split = str.split("\\s+");
         ArrayList<Integer> integers = new ArrayList<>();
         for (int i = 0; i < split.length; i++) {
@@ -44,11 +48,14 @@ public class D1028SumArray {
         int size = integers.size();
         ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            Integer C = integers.get(i);
-            ArrayList<String> check = check(i, C, integers);
+            String C = strings.get(i);
+            String replace = str.replace(C, "");
+            List<String> strings1 = Arrays.asList(str.replace(C, "").split(" ")).stream().filter(v -> !v.equals("")).collect(Collectors.toList());
+            ArrayList<String> check = check(i, Integer.parseInt(C), strings1,replace);
             if (check.size() > 0) {
                 list.addAll(check);
             }
+
         }
         if (list.size() > 0) {
             list.stream().forEach(vo -> System.out.println(vo));
@@ -57,17 +64,16 @@ public class D1028SumArray {
         }
     }
 
-    private static ArrayList<String> check(int i, Integer c, ArrayList<Integer> integers) {
+    private static ArrayList<String> check(int i, Integer c, List<String> integers,String replace) {
         int temp = 0;
         ArrayList<String> list = new ArrayList<>();
         while (temp < integers.size()) {
-            if (temp != i) {
-                Integer B = integers.get(temp);
-                int A = getValue(B, c);
-                if (integers.contains(A)) {
+                String B = integers.get(temp);
+            String replace1 = replace.replace(B, "");
+            int A = getValue(Integer.parseInt(B), c);
+                if (replace1.contains(String.valueOf(A))) {
                     list.add(A + " " + B + " " + c);
                 }
-            }
             temp++;
         }
         return list;

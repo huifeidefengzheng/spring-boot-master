@@ -20,8 +20,11 @@ import java.util.Scanner;
  *     2234为最长的非严格递增连续数字序列，所以长度为4
  *
  *     aaaaaa44ko543j123j7345677781
+ *     -->34567778
  *     aaaaa34567778a44ko543j123j71
+ *     -->34567778
  *     345678a44ko543j123j7134567778aa
+ *     -->
  */
 public class D0924StringUp {
     public static void main(String[] args) {

@@ -79,4 +79,38 @@ public class D1442SorcedHight {
         }
     }
 
+    public static void test() {
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine();
+        String[] s1 = s.split(" ");
+        int[] arr = new int[s1.length];
+        for (int i = 0; i < s1.length; i++) {
+            try {
+                arr[i] = Integer.parseInt(s1[i]);
+            }catch (Exception exception) {
+                System.out.println("[]");
+                return;
+            }
+        }
+
+        for (int i = 0; i < arr.length-1; i++) {
+            if (i%2 == 0) {
+                if (arr[i] <arr[i+1]) {
+                    int tem = arr[i];
+                    arr[i] = arr[i +1];
+                    arr[i +1] = tem;
+                }
+            } else {
+                if (arr[i] > arr[i+1]) {
+                    int tem = arr[i];
+                    arr[i] = arr[i +1];
+                    arr[i +1] = tem;
+                }
+            }
+        }
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + "");
+        }
+    }
+
 }
