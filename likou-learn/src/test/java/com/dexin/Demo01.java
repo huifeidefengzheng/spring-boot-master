@@ -11,6 +11,10 @@ import java.util.stream.Stream;
 public class Demo01 {
 
     @Test
+    public void test06() {
+        System.out.println(1);
+    }
+    @Test
     public void test05() {
         int line = 6;
         int tem = 0;

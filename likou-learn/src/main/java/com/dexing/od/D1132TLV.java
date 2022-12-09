@@ -21,7 +21,12 @@ import java.util.Scanner;
  * 输出
  * 32 33
  * 说明
- * 需要解析的信元的Tag是31，从码流的起始处开始匹配，Tag为32的信元长度为1（01 00，小端序表示为1）；第二个信元的Tag是90，其长度为2；第三个信元的Tag是30，其长度为3；第四个信元的Tag是31，其长度为2（02 00），所以返回长度后面的两个字节即可，即32 33。
+ * 需要解析的信元的Tag是31，从码流的起始处开始匹配，
+ * Tag为32的信元长度为1（01 00，小端序表示为1）；
+ * 第二个信元的Tag是90，其长度为2；
+ * 第三个信元的Tag是30，其长度为3；
+ * 第四个信元的Tag是31，其长度为2（02 00），
+ * 所以返回长度后面的两个字节即可，即32 33。
  */
 public class D1132TLV {
     public static void main(String[] args) {
@@ -61,6 +66,27 @@ public class D1132TLV {
         public Inner(int length, String content) {
             this.length = length;
             this.content = content;
+        }
+    }
+
+    public static void test2() {
+        //处理输入
+        Scanner in=new Scanner(System.in);
+        String tag = in.nextLine();
+        String[] tlv_info = in.nextLine().split(" ");
+        for (int i = 0; i < tlv_info.length; ) {
+            //转成int
+            int length = Integer.parseInt(tlv_info[i + 2] + tlv_info[i + 1], 16);
+            if (tag.equals(tlv_info[i])) {
+                StringBuilder res_str = new StringBuilder();
+                for (int j = i + 3; j < i + 3 + length; j++) {
+                    res_str.append(tlv_info[j]).append(" ");
+                }
+                System.out.println(res_str.toString());
+                break;
+            } else {
+                i += length + 3;
+            }
         }
     }
 }
