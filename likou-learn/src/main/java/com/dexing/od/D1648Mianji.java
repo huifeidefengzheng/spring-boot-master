@@ -21,6 +21,13 @@ import java.util.Scanner;
  * 4 -2
  * 输出
  * 12
+ *  示例2 输入输出示例仅供调试，后台判题数据一般不包含示例
+ *  输入
+ *  2 4
+ *  0 1
+ *  2 -2
+ *  输出
+ *  4
  */
 public class D1648Mianji {
     public static void main(String[] args) {
@@ -48,12 +55,14 @@ public class D1648Mianji {
             int area=0,preX = 0,preY=0;
             int n1 = sc.nextInt();
             int maxX = sc.nextInt();
+            sc.nextLine();
             for(int i=0;i<n1;i++){
                 int nowX = sc.nextInt();
                 int nowY = sc.nextInt();
                 area += (nowX-preX)*preY;
                 preX = nowX;
                 preY+=nowY;
+                sc.nextLine();
             }
             area += preY*(maxX-preX);
             System.out.print(area);

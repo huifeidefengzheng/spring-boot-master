@@ -20,6 +20,17 @@ import java.util.stream.Stream;
  * 10 11 21 19 21 17 21 16 21 18 15
  * 输出
  * 21
+ * 
+ *  示例2  输入输出示例仅供调试，后台判题数据一般不包含示例 
+ *  输入 
+ *  2 1 5 4 3 3 9 2 7 4 6 2 15 4 2 4 
+ *  输出 
+ *  3 
+ *  示例3  输入输出示例仅供调试，后台判题数据一般不包含示例 
+ *  输入 
+ *  5 1 5 3 5 2 5 5 7 6 7 3 7 11 7 55 7 9 98 9 17 9 15 9 9 1 39 
+ *  输出 
+ *  7 
  */
 public class D0821ZhongShu {
     public static void main(String[] args) {
@@ -52,8 +63,6 @@ public class D0821ZhongShu {
             if (entry.getValue() >= max) {
                 mode.add(entry.getKey());
                 max = entry.getValue();
-            } else {
-                break;
             }
         }
         // 计算中位数

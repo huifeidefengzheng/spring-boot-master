@@ -78,7 +78,7 @@ public class D1755LianxuZimuLength {
             }
         }
         list.sort((a1,b1) -> b1 - a1);
-        if (list.size()<k1){
+        if (list.size()< k1){
             System.out.println(-1);
         }else {
             System.out.println(list.get(k1-1));

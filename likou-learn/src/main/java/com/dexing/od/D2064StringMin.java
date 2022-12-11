@@ -1,6 +1,7 @@
 package com.dexing.od;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Stack;
 
 /**
@@ -26,10 +27,44 @@ import java.util.Stack;
  * -31
  * 说明
  * 1+2+（-34） = 31
+ *
+ * 思路：负数取最大，正数取最小
  */
 public class D2064StringMin {
     public static void main(String[] args) {
         test();
+    }
+
+    public static void test2() {
+        //处理输入
+        Scanner in=new Scanner(System.in);
+        String input_str= in.nextLine();
+        char[] chars = input_str.toCharArray();
+        int min_sum = 0;
+
+        for (int i = 0; i < chars.length; i++) {
+            char c = chars[i];
+            //遇到符号，往后取到非数字为止
+            if (c == '-') {
+                i++;
+                int start = i;
+                while (i < chars.length && Character.isDigit(chars[i])) {
+                    i++;
+                }
+                String substring = input_str.substring(start, i);
+                if (substring.length() > 0) {
+                    min_sum -= Integer.parseInt(substring);
+                }
+                i--;
+                continue;
+            }
+            //否则直接取当前数字
+            if (Character.isDigit(c)) {
+                min_sum += Character.digit(c, 10);
+            }
+        }
+
+        System.out.println(min_sum);
     }
 
     public static void test() {

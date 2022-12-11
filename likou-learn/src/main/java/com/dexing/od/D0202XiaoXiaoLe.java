@@ -15,16 +15,20 @@ public class D0202XiaoXiaoLe {
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
 
-        Stack<String> strings = new Stack<>();
-        strings.push("" + str.charAt(0));
-        for (int i = 1; i < str.length(); i++) {
-            String pop = strings.peek();
-            String temp = "" + str.charAt(i);
-            if (pop.equals(temp)) {
+        Stack<Character> strings = new Stack<>();
+        for (int i =0; i < str.length(); i++) {
+            Character temp = str.charAt(i);
+            if (!((temp >= 'a' && temp <= 'z') || (temp >= 'A' && temp <= 'Z'))){
+                System.out.println(0);
+                return;
+            }
+            if (!strings.empty() && strings.peek() ==temp) {
                 strings.pop();
             } else {
                 strings.push(temp);
             }
+
+
         }
         System.out.println(strings.size());
 

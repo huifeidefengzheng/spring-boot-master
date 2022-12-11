@@ -1,7 +1,13 @@
 package com.dexing.od;
 
+import java.util.Scanner;
+
 /**
- * 给定一组不等式，判断是否成立并输出不等式的最大差(输出浮点数的整数部分)，要求：1）不等式系数为double类型，是一个二维数组；2）不等式的变量为int类型，是一维数组；3）不等式的目标值为double类型，是一维数组；4）不等式约束为字符串数组，只能是：“>”,“>=”,“<”,“<=”,“=”，例如,不等式组：
+ * 给定一组不等式，判断是否成立并输出不等式的最大差(输出浮点数的整数部分)，要求：
+ * 1）不等式系数为double类型，是一个二维数组；
+ * 2）不等式的变量为int类型，是一维数组；
+ * 3）不等式的目标值为double类型，是一维数组；
+ * 4）不等式约束为字符串数组，只能是：“>”,“>=”,“<”,“<=”,“=”，例如,不等式组：
  * a11x1+a12x2+a13x3+a14x4+a15x5<=b1;
  * a21x1+a22x2+a23x3+a24x4+a25x5<=b2;
  * a31x1+a32x2+a33x3+a34x4+a35x5<=b3;
@@ -33,6 +39,68 @@ public class D1859OddsMax {
     public static void main(String[] args) {
         test();
     }
+
+    public static void test2() {
+        //处理输入
+        Scanner in=new Scanner(System.in);
+        String[] input_str = in.nextLine().split(";");
+
+        //各项系数初始化
+        int num_eq = input_str[input_str.length - 1].split(",").length;
+        int num_x = input_str[0].split(",").length;
+        double[][] a= new double[num_eq][num_x];
+        int[] x = new int[num_x];
+        double[] b = new double[num_eq];
+        String[] eq = new String[num_eq];
+        int[] res = new int[num_eq];
+        int result = 0;
+        boolean flag = true;
+
+        // 输入字符串处理
+        for (int i = 0; i < num_eq; i++) {
+            String[] param_a = input_str[i].split(",");
+            for (int j = 0; j < param_a.length; j++) {
+                a[i][j] = Double.valueOf(param_a[j]);
+            }
+        }
+        String[] param_b = input_str[num_eq + 1].split(",");
+        for (int i = 0; i < param_b.length; i++) {
+            b[i] = Double.valueOf(param_b[i]);
+        }
+        String[] param_x = input_str[num_eq].split(",");
+        for (int i = 0; i < param_x.length; i++) {
+            x[i] = Integer.parseInt(param_x[i]);
+        }
+        String[] param_char = input_str[num_eq + 2].split(",");
+        for (int i = 0; i < param_char.length; i++) {
+            eq[i] = param_char[i];
+        }
+
+        //算不等式结果
+        for (int i = 0; i < num_eq; i++) {
+            double tmp = 0.0;
+            for (int j = 0; j < num_x; j++) {
+                tmp += a[i][j] * x[j];
+            }
+            if ("<=".equals(eq[i])) {
+                flag = tmp <= b[i] ? flag && true : flag && false;
+            } else if ("<".equals(eq[i])) {
+                flag = tmp < b[i] ? flag && true : flag && false;
+            }else if ("=".equals(eq[i])) {
+                flag = tmp == b[i] ? flag && true : flag && false;
+            }else if (">=".equals(eq[i])) {
+                flag = tmp >= b[i] ? flag && true : flag && false;
+            }else if (">".equals(eq[i])) {
+                flag = tmp > b[i] ? flag && true : flag && false;
+            }
+            res[i] =(int) ((tmp - b[i]) / 1);
+        }
+        for (int i = 0; i < num_eq; i++) {
+            result = Math.max(result, res[i]);
+        }
+        System.out.println(flag + " " + result);
+    }
+
     public static void test() {
         String str = "2.36,3,6,7.1,6;1,30,8.6,2.5,21;0.3,69,5.3,6.6,7.8;1,13,2,17,5;340,67,300.6;<=,>=,<=";
         String[] split = str.split(";");
